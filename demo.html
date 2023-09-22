@@ -1,0 +1,75 @@
+<html>
+
+<head>
+	<title>Pure js multiselect demo</title>
+	<link href="styles/multiselect.css" rel="stylesheet" />
+	<link href="style.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="multiselect.min.js"></script>
+	<style>
+		/* example of setting the width for multiselect */
+		#testSelect1_multiSelect {
+			width: 1000px;
+		}
+	</style>
+</head>
+
+<body>
+	<span class="displayText" id="displayText">Hi I am ToolTip</span>
+	<div id="x">
+	<select id='testSelect1' multiple onclick="myFunction()">
+
+		<option name="drop" class="drop" value='10X Engineering'>10X Engineering</option>
+		<option name="drop" class="drop" value='ADEPT Engineering'>ADEPT Engineering</option>
+		<option name="drop" class="drop" value='AIM IT'>AIM IT</option>
+		<option name="drop" class="drop" value='Anthem Reimagine Solutions'>Anthem Reimagine Solutions</option>
+		<option name="drop" class="drop" value='Artificial Intelligence'>Artificial Intelligence</option>
+		<option name="drop" class="drop" value='Aspire IT'>Aspire IT</option>
+		<option name="drop" class="drop" value='Associate Experience'>Associate Experience</option>
+		<option name="drop" class="drop" value='Beacon IT'>Beacon IT</option>
+		<option name="drop" class="drop" value='Bench Pool'>Bench Pool</option>
+		<option name="drop" class="drop" value='Bench Pool-Commercial'>Bench Pool-Commercial</option>
+		<option name="drop" class="drop" value='Bench Pool-Data'>Bench Pool-Data</option>
+		<option name="drop" class="drop" value='Bench Pool-Digital'>Bench Pool-Digital</option>
+		<option name="drop" class="drop" value='Business Continuation'>Business Continuation</option>
+	</select>
+		</div>
+
+	<div>
+		<button onclick="myFunction()" id="submitbtn">SUBMIT</button>
+	</div>
+	<a href="#" data-toggle="tooltip" title="" name ="link" id="link">Hover over me</a>
+	<p id="red"></p>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script>
+		document.multiselect('#testSelect1')
+			.setCheckBoxClick("checkboxAll", function (target, args) {
+				console.log("Checkbox 'Select All' was clicked and got value ", args.checked);
+			})
+			.setCheckBoxClick("1", function (target, args) {
+				console.log("Checkbox for item with value '1' was clicked and got value ", args.checked);
+			});
+
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+		function myFunction() {
+			var selectedOptions = document.getElementById('testSelect1').selectedOptions;
+			var selectedValues = Array.from(selectedOptions).map(option => option.value);
+			alert("Selected Values: " + selectedValues.join(", "));
+			var pt = document.getElementById('red');
+			pt.innerHTML = selectedValues.join(", ");
+			document.getElementById("submitbtn").title = selectedValues.join(", ");
+            document.getElementById("x").title = selectedValues.join(", ");
+		}
+		function tooltip() {
+			var popup = document.getElementById("displayText");
+			popup.classList.toggle("show");
+		}
+
+	</script>
+</body>
+
+</html>
